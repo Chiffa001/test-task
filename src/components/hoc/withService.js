@@ -1,14 +1,14 @@
 import React from "react";
-import {Consumer} from "../service-context";
+import {ServiceConsumer} from "../service-context";
 
-export const withService = () => (Wrapped) => {
+export const withService = (Wrapped) => {
     return (props) => {
         return (
-            <Consumer>
+            <ServiceConsumer>
                 {
-                    (service) => <Wrapped {...props} sevice={service}/>
+                    (service) => <Wrapped {...props} service={service}/>
                 }
-            </Consumer>
+            </ServiceConsumer>
         );
     };
 };

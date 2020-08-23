@@ -1,12 +1,13 @@
 import React, {useState} from "react";
 import {withRouter} from "react-router-dom";
 
-import {checkValidityPassword} from "../../utils";
+import {checkValidityPassword, compose} from "../../utils";
+import {withService} from "../hoc";
 import WarningList from "../warning-list";
 
 let warningList = [];
 
-const LoginPage = ({history}) => {
+const LoginPage = ({history, service}) => {
     const [login, setLogin] = useState("");
     const [password, setPassword] = useState("");
     const [isValid, setIsValid] = useState(null);
@@ -27,7 +28,7 @@ const LoginPage = ({history}) => {
         }
         setIsValid(false);
     };
-
+    service.getUser("Chiffa001").then(console.log);
     return (
         <form onSubmit={submitForm}>
             <div className="form-group">
@@ -55,4 +56,4 @@ const LoginPage = ({history}) => {
     );
 };
 
-export default withRouter(LoginPage);
+export default compose(withRouter, withService)(LoginPage);
